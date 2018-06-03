@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>index Film</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <div><h1>Bienvenido al cine Gambero</h1></div>
+        <hr/>
+        <div align="center"><h2>Listado de películas</h2>
+            
+            <h:form> 
+                <h3>Seleccione categoría</h3>  
+                <h:selectOneMenu value = "#{filmBean.categoriaId}"> 
+                    <f:selectItems value="#{filmBean.listaCategorias}" var="categoria" itemValue="#{categoria.categoryId}" itemLabel="#{categoria.name}"/>    
+                    </h:selectOneMenu>  
+                <h:commandButton action="#{filmBean.doCarga()}" value="Filtrar" />
+                <!-- <h:commandButton value = "Filtrar" action = "index" /> -->
+                <h:commandButton action="#{filmBean.doReset()}" value="Reset" />
+            </h:form>
+            <br/><br/>
+            
+            <h3>ID Category: #{filmBean.categoriaId}</h3>
+ 
+           <!-- <h:dataTable value = "#{filmBean.categoriaSeleccionada.filmCategoryList}" var="film" border="2"> -->
+            <h:dataTable value = "#{filmBean.listaMaxima}" var="film" border="2">
+                <h:column>
+                    <f:facet name="header">
+                        Titulo
+                    </f:facet>
+                    #{film.film.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Año
+                    </f:facet>
+                    #{film.film.releaseYear}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Duración
+                    </f:facet>
+                    #{film.film.FLength}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Puntuación
+                    </f:facet>
+                    #{film.film.ratingId.ratingId}
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <h:commandButton action="#{filmBean.doBorrar(film.film.filmId)}" value="Borrar" />
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+            
+</div>
+    </h:body>
+</html>
