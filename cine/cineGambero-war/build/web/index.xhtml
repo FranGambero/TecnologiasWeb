@@ -31,7 +31,14 @@ and open the template in the editor.
             <h3>ID Category: #{filmBean.categoriaId}</h3>
  
            <!-- <h:dataTable value = "#{filmBean.categoriaSeleccionada.filmCategoryList}" var="film" border="2"> -->
+            <h:form>
             <h:dataTable value = "#{filmBean.listaMaxima}" var="film" border="2">
+                <h:column>
+                    <f:facet name="header">
+                        ID
+                    </f:facet>
+                    #{film.film.filmId}
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         Titulo
@@ -57,11 +64,10 @@ and open the template in the editor.
                     #{film.film.ratingId.ratingId}
                 </h:column>
                 <h:column>
-                    <h:form>
                         <h:commandButton action="#{filmBean.doBorrar(film.film.filmId)}" value="Borrar" />
-                    </h:form>
                 </h:column>
             </h:dataTable>
+            </h:form>
             
 </div>
     </h:body>

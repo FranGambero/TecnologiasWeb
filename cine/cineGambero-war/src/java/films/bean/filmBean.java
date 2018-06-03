@@ -43,6 +43,7 @@ public class filmBean implements Serializable{
     protected Category categoriaSeleccionada;
     protected Short categoriaId=0;
     protected FilmCategory categoriaPelicula;
+    protected Short filmIdSeleccionado =-1;
     
     /**
      * Creates a new instance of filmBean
@@ -89,6 +90,15 @@ public class filmBean implements Serializable{
     public void setListaMaxima(List<FilmCategory> listaMaxima) {
         this.listaMaxima = listaMaxima;
     }
+
+    public Short getFilmIdSeleccionado() {
+        return filmIdSeleccionado;
+    }
+
+    public void setFilmIdSeleccionado(Short filmIdSeleccionado) {
+        this.filmIdSeleccionado = filmIdSeleccionado;
+    }
+    
     
     
 
@@ -106,11 +116,23 @@ public class filmBean implements Serializable{
         return "index";
     }
     
-    public String doBorrar(Short filmId){
-        Film film = this.filmFacade.find(filmId);
-        this.filmFacade.remove(film);
+    public String doBorrar(Short filmID){
+        this.filmIdSeleccionado = filmID;
+        /*Film film = this.filmFacade.find(19);
+        FilmCategory fm = this.filmCategoryFacade.find(19);
+        if(film != null)
+            this.filmFacade.remove(film);
+            this.filmCategoryFacade.remove(fm);
         
-        return "index";
+        return "index"; */
+        return "prueba";
+    }
+    
+    public String doEditar(Short filmId){
+        
+        
+        
+        return "editarFilm";
     }
     
     @PostConstruct
@@ -118,7 +140,7 @@ public class filmBean implements Serializable{
         listaPeliculas = filmFacade.findAll();
         listaCategorias = categoryFacade.findAll();
         listaMaxima = filmCategoryFacade.findAll();
-        
+        this.filmIdSeleccionado = -1;
         //categoriaSeleccionada.getFilmCategoryList().get(0).getFilm();
         //categoriaPelicula = filmCategoryFacade.find(categoriaId);
         
